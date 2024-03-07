@@ -18,11 +18,56 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+        chunks: ['main'],
+        filename: 'index.html'
+      }),
+      new HtmlWebpackPlugin({
+        template: './src/install.html',
+        chunks: ['install'],
+        filename: 'install.html'
+      }),
+      new WebpackPwaManifest({
+        name: 'Budget Tracker',
+        short_name: 'Budget Tracker',
+        description: 'An application that allows you to track your budget.',
+        background_color: '#01579b',
+        theme_color: '#ffffff',
+        'theme-color': '#ffffff',
+        start_url: '/',
+        icons: [
+          {
+            src: path.resolve('src/icons/icon-192x192.png'),
+            sizes: [192, 512],
+            destination: path.join('icons')
+          }
+        ]
+      }),
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'service-worker.js'
+      })
       
     ],
 
     module: {
       rules: [
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
+          test: /\.m?js$/,
+          exclude: /(node_modules|bower_components)/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-transform-runtime']
+            }
+          }
+        }
         
       ],
     },
