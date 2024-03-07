@@ -61,7 +61,7 @@ Clone the repsoitory and run the scripts in the package-json, it should be runni
 
 ## Usage
 
-Lets you add text and remove text, you can also access it without the internet and another feature is that you ccan install it!
+Lets you add text and remove text, you can also access it without the internet and another feature is that you can install it!
 
 ## Contacts
 
